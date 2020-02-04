@@ -21,7 +21,7 @@
 **etc**
 - Configure Management: Git, Github
 - Build: Gradle 4.10.2
-- Coding Convention: [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)
+- Coding Convention: Intellij Default
 
 ### Commit Convention
 
