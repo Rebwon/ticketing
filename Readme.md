@@ -2,7 +2,7 @@
 
 ### Project Spec
 
-**Backend**
+**BackEnd**
 - Java 8
 - Spring Boot 2.1.9
 - Spring Data JPA
@@ -10,6 +10,13 @@
 - Spring Rest Docs
 - QueryDSL
 - Junit4
+
+**FrontEnd**
+- HTML5
+- CSS3
+- JavaScript(Legacy)
+- jQuery
+- BootStrap
 
 **etc**
 - Configure Management: Git, Github
