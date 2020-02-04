@@ -3,8 +3,7 @@
 ### Project Spec
 
 - Java Version: 8
-- FrontEnd: jQuery, BootStrap, html5, css3, javascript(legacy)
-- BackEnd: Spring Boot 2.1.9 + Jpa + OAuth2 + QueryDSL
+- BackEnd: Spring Boot 2.1.9 + Jpa + OAuth2 + QueryDSL + RestDocs
 - Configure Management: Git, Github
 - Build: Gradle 4.10.2
 - Coding Convention: [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)
