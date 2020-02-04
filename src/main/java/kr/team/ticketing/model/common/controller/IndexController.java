@@ -1,4 +1,4 @@
-package kr.team.ticketing.web;
+package kr.team.ticketing.model.common.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
