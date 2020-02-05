@@ -1,17 +1,18 @@
-package kr.team.ticketing.domain.member;
+package kr.team.ticketing.domain.product;
 
 import lombok.Getter;
 
 import javax.persistence.*;
 
-@Getter
-@Table(name = "MEMBERS")
 @Entity
-public class Member {
+@Table(name = "CATEGORY")
+@Getter
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "MEMBER_ID")
+    @Column(name = "CATEGORY_ID")
     private Long id;
 
+    @Column(name = "CATEGORY_NAME")
     private String name;
 }
