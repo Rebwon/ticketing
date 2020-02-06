@@ -1,6 +1,5 @@
 package kr.team.ticketing.domain.product;
 
-import kr.team.ticketing.domain.generic.money.Money;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -15,5 +14,5 @@ public class OptionSpec {
     private Long id;
 
     @Column(name = "PRICE")
-    private Money price;
+    private int price;
 }

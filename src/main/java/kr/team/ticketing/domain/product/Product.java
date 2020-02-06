@@ -4,6 +4,8 @@ import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "PRODUCTS")
@@ -33,5 +35,7 @@ public class Product {
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 
-
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PRODUCT_ID")
+    private List<OptionGroupSpec> optionGroupSpecs = new ArrayList<>();
 }
