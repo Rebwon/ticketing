@@ -11,8 +11,6 @@ import java.util.List;
 @Table(name = "RESERVATIONS")
 @Getter
 public class Reservation {
-    public enum ReservationStatus{PAYED, CANCELD, SCHEDULED};
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RESERVATION_ID")
@@ -20,9 +18,6 @@ public class Reservation {
 
     @Column(name = "MEMBER_ID")
     private Long memberId;
-
-    @Column(name = "PRODUCT_ID")
-    private Long productId;
 
     @Column(name = "RESERVATION_MEMBER_NAME")
     private String reservationMemberName;
@@ -42,5 +37,7 @@ public class Reservation {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "RESERVATION_ID")
-    private List<ReservationLineItem> reservationLineItems = new ArrayList<>();
+    private List<ReservationInfo> reservationInfoList = new ArrayList<>();
+
+    public Reservation() {}
 }

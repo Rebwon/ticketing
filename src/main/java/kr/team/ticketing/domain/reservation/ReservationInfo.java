@@ -7,21 +7,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "RESERVATION_LINE_ITEMS")
+@Table(name = "RESERVATION_INFO")
 @Getter
-public class ReservationLineItem {
+public class ReservationInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "RESERVATION_LINE_ITEM_ID")
+    @Column(name = "RESERVATION_INFO_ID")
     private Long id;
 
-    @Column(name = "PRODUCT_NAME")
+    @Column(name = "PRODUCT_ID")
+    private Long productId;
+
+    @Column(name = "CONTENT_NAME")
     private String name;
 
-    @Column(name = "PRODUCT_COUNT")
+    @Column(name = "CONTENT_COUNT")
     private int count;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "RESERVATION_LINE_ITEM_ID")
+    @JoinColumn(name = "RESERVATION_INFO_ID")
     private List<ReservationOptionGroup> groups = new ArrayList<>();
 }
