@@ -22,7 +22,7 @@ public class OptionGroupSpec {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "DETAILS")
+    @Column(name = "DETAIL")
     private OptionGroupDetail detail;
 
     @OneToMany(cascade = CascadeType.ALL)

@@ -1,7 +1,9 @@
 package kr.team.ticketing.domain.reservation;
 
 import kr.team.ticketing.domain.common.BaseTimeEntity;
+import kr.team.ticketing.domain.common.Email;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,10 +26,11 @@ public class Reservation extends BaseTimeEntity {
     private Long memberId;
 
     @Column(name = "RESERVATION_MEMBER_NAME")
-    private String reservationMemberName;
+    private String name;
 
     @Column(name = "RESERVATION_MEMBER_EMAIL")
-    private String email;
+    @Embedded
+    private Email email;
 
     @Column(name = "RESERVATION_MEMBER_TEL")
     private String tel;
@@ -42,4 +45,14 @@ public class Reservation extends BaseTimeEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "RESERVATION_ID")
     private List<ReservationInfo> reservationInfoList = new ArrayList<>();
+
+    @Builder
+    public Reservation(String name, Email email, String tel, ReservationStatus reservationStatus, LocalDateTime reservationDate, List<ReservationInfo> reservationInfoList) {
+        this.name = name;
+        this.email = email;
+        this.tel = tel;
+        this.reservationStatus = reservationStatus;
+        this.reservationDate = reservationDate;
+        this.reservationInfoList.addAll(reservationInfoList);
+    }
 }

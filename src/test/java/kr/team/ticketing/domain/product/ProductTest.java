@@ -41,9 +41,9 @@ public class ProductTest {
                         OptionGroupSpec.builder()
                             .detail(AGE)
                             .options(Arrays.asList(
-                                new OptionSpec("성인", 15000),
-                                new OptionSpec("청소년", 13500),
-                                new OptionSpec("7세이상", 11000)))
+                                OptionSpec.builder().name("성인").price(15000).build(),
+                                OptionSpec.builder().name("청소년").price(13500).build(),
+                                OptionSpec.builder().name("7세 이상").price(12000).build()))
                             .build()))
                 .build());
 
@@ -60,7 +60,6 @@ public class ProductTest {
         assertThat(product.getOptionGroupSpecs().get(0).getDetail()).isEqualTo(AGE);
     }
 
-    @Ignore
     @Test
     public void findAllCategory(){
         List<Product> musical = productRepository.findAllByCategory(new Category("뮤지컬"));

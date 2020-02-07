@@ -1,5 +1,6 @@
 package kr.team.ticketing.domain.member;
 
+import kr.team.ticketing.domain.common.Email;
 import kr.team.ticketing.domain.reservation.Reservation;
 import lombok.AccessLevel;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package kr.team.ticketing.domain.member;
+package kr.team.ticketing.domain.common;
 
 import lombok.AccessLevel;
 import lombok.Getter;

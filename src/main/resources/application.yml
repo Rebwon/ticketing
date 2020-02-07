@@ -12,3 +12,8 @@ spring:
   h2:
     console:
       enable: true
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
