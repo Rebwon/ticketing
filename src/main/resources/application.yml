@@ -1,0 +1,19 @@
+spring:
+  profile: local
+  datasource:
+    data: classpath:data-h2.sql
+  jpa:
+    properties.hibernate:
+      hbm2ddl.auto: update
+      format_sql: true
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    showSql: true
+    generate-ddl: true
+  h2:
+    console:
+      enable: true
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
