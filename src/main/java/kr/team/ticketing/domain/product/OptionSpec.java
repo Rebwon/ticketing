@@ -16,6 +16,14 @@ public class OptionSpec {
     @Column(name = "OPTION_SPEC_ID")
     private Long id;
 
+    @Column(name = "NAME")
+    private String name;
+
     @Column(name = "PRICE")
     private int price;
+
+    public OptionSpec(String name, int price) {
+        this.name = name;
+        this.price = price;
+    }
 }

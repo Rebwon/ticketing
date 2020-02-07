@@ -1,6 +1,9 @@
 package kr.team.ticketing.domain.product;
 
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,6 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "OPTION_GROUP_SPECS")
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OptionGroupSpec {
     public enum OptionGroupDetail{AGE,GRADE,PACKAGE}
 
@@ -24,4 +28,10 @@ public class OptionGroupSpec {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "OPTION_GROUP_SPEC_ID")
     private List<OptionSpec> optionSpecs = new ArrayList<>();
+
+    @Builder
+    public OptionGroupSpec(OptionGroupDetail detail, List<OptionSpec> options) {
+        this.detail = detail;
+        this.optionSpecs.addAll(options);
+    }
 }

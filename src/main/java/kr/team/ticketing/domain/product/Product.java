@@ -38,7 +38,7 @@ public class Product {
     @Column(name = "LOCATION")
     private String location;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 
@@ -47,7 +47,7 @@ public class Product {
     private List<OptionGroupSpec> optionGroupSpecs = new ArrayList<>();
 
     @Builder
-    public Product(Category category, String name, String description, int count, LocalDateTime startDate, LocalDateTime endDate, String location) {
+    public Product(Category category, String name, String description, int count, LocalDateTime startDate, LocalDateTime endDate, String location, List<OptionGroupSpec> optionGroupSpecs) {
         this.category = category;
         this.name = name;
         this.description = description;
@@ -55,5 +55,6 @@ public class Product {
         this.startDate = startDate;
         this.endDate = endDate;
         this.location = location;
+        this.optionGroupSpecs.addAll(optionGroupSpecs);
     }
 }

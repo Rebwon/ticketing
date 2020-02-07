@@ -3,3 +3,4 @@ insert into CATEGORY(CATEGORY_ID, CATEGORY_NAME) VALUES(2, '전시');
 insert into CATEGORY(CATEGORY_ID, CATEGORY_NAME) VALUES(3, '전통공연');
 
 insert into products(PRODUCT_ID, PRODUCT_COUNT, PRODUCT_NAME, PRODUCT_DESCRIPTION, LOCATION, START_DATE, END_DATE, CATEGORY_ID) VALUES(1, 25, '헬로 카봇 별나라를 찾아라', '헬로 카봇~~', 'LG 아트센터', now(), now(), 1);
+insert into products(PRODUCT_ID, PRODUCT_COUNT, PRODUCT_NAME, PRODUCT_DESCRIPTION, LOCATION, START_DATE, END_DATE, CATEGORY_ID) VALUES(2, 25, '오페라의 유령', '오페라의 유령~~', '예술의 전당', now(), now(), 1);
