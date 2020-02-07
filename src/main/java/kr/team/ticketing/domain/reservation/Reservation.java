@@ -42,7 +42,7 @@ public class Reservation extends BaseTimeEntity {
     @Column(name = "RESERVATION_DATE")
     private LocalDateTime reservationDate;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "RESERVATION_ID")
     private List<ReservationInfo> reservationInfoList = new ArrayList<>();
 

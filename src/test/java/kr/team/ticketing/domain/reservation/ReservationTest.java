@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Arrays;
 import java.util.List;
 
-import static kr.team.ticketing.domain.reservation.ReservationOptionGroup.ReservationOptionGroupDetail.AGE;
+import static kr.team.ticketing.domain.reservation.ReservationOptionGroupDetail.AGE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)

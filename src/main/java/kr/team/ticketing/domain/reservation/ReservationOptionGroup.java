@@ -13,8 +13,6 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ReservationOptionGroup {
-    public enum ReservationOptionGroupDetail{AGE,GRADE,PACKAGE}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="RESERVATION_OPTION_GROUP_ID")

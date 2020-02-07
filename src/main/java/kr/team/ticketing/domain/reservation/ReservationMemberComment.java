@@ -1,13 +1,16 @@
 package kr.team.ticketing.domain.reservation;
 
 import kr.team.ticketing.domain.common.BaseTimeEntity;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "RESERVATION_MEMBER_COMMENT")
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ReservationMemberComment extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
