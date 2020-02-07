@@ -26,6 +26,9 @@ public class Product {
     @Column(name = "PRODUCT_DESCRIPTION")
     private String description;
 
+    @Column(name = "PRODUCT_COUNT")
+    private int count;
+
     @Column(name = "START_DATE")
     private LocalDateTime startDate;
 
@@ -44,9 +47,11 @@ public class Product {
     private List<OptionGroupSpec> optionGroupSpecs = new ArrayList<>();
 
     @Builder
-    public Product(String name, String description, LocalDateTime startDate, LocalDateTime endDate, String location) {
+    public Product(Category category, String name, String description, int count, LocalDateTime startDate, LocalDateTime endDate, String location) {
+        this.category = category;
         this.name = name;
         this.description = description;
+        this.count = count;
         this.startDate = startDate;
         this.endDate = endDate;
         this.location = location;
