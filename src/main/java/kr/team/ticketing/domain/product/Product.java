@@ -1,6 +1,9 @@
 package kr.team.ticketing.domain.product;
 
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "PRODUCTS")
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,4 +42,13 @@ public class Product {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "PRODUCT_ID")
     private List<OptionGroupSpec> optionGroupSpecs = new ArrayList<>();
+
+    @Builder
+    public Product(String name, String description, LocalDateTime startDate, LocalDateTime endDate, String location) {
+        this.name = name;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.location = location;
+    }
 }

@@ -25,10 +25,9 @@ public class MemberTest {
     @Test
     public void insert(){
         // given
-        Email email = new Email("chulsu@naver.com");
         memberRepository.save(Member.builder()
                 .name("김철수")
-                .email(email)
+                .email(new Email("chulsu@naver.com"))
                 .tel("010-2221-3321")
                 .picture("pic")
                 .build());
