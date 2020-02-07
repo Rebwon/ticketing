@@ -1,7 +1,10 @@
 package kr.team.ticketing.domain.member;
 
 import kr.team.ticketing.domain.reservation.Reservation;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,6 +13,7 @@ import java.util.List;
 @Getter
 @Table(name = "MEMBERS")
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,4 +30,12 @@ public class Member {
 
     @OneToMany
     private List<Reservation> reservationList = new ArrayList<>();
+
+    @Builder
+    public Member(String name, Email email, String tel, String picture) {
+        this.name = name;
+        this.email = email;
+        this.tel = tel;
+        this.picture = picture;
+    }
 }

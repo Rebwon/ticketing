@@ -1,6 +1,9 @@
 package kr.team.ticketing.domain.reservation;
 
+import kr.team.ticketing.domain.common.BaseTimeEntity;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,7 +13,8 @@ import java.util.List;
 @Entity
 @Table(name = "RESERVATIONS")
 @Getter
-public class Reservation {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Reservation extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RESERVATION_ID")
@@ -35,9 +39,7 @@ public class Reservation {
     @Column(name = "RESERVATION_DATE")
     private LocalDateTime reservationDate;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "RESERVATION_ID")
     private List<ReservationInfo> reservationInfoList = new ArrayList<>();
-
-    public Reservation() {}
 }
