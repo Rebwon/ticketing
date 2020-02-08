@@ -14,8 +14,6 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OptionGroupSpec {
-    public enum OptionGroupDetail{AGE,GRADE,PACKAGE}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "OPTION_GROUP_SPEC_ID")

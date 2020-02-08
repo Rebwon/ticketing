@@ -2,7 +2,6 @@ package kr.team.ticketing.domain.product;
 
 import kr.team.ticketing.domain.common.utils.DateTimeUtils;
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Arrays;
 import java.util.List;
 
-import static kr.team.ticketing.domain.product.OptionGroupSpec.OptionGroupDetail.AGE;
+import static kr.team.ticketing.domain.product.OptionGroupDetail.AGE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -57,7 +56,9 @@ public class ProductTest {
         assertThat(product.getLocation()).isEqualTo("LG 아트센터");
         assertThat(product.getCategory().getName()).isEqualTo("뮤지컬");
 
-        assertThat(product.getOptionGroupSpecs().get(0).getDetail()).isEqualTo(AGE);
+        OptionGroupSpec groupSpec = product.getOptionGroupSpecs().get(0);
+        assertThat(groupSpec.getDetail()).isEqualTo(AGE);
+        assertThat(groupSpec.getOptionSpecs().get(0).getName()).isEqualTo("성인");
     }
 
     @Test
