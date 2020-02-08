@@ -1,5 +1,6 @@
 package kr.team.ticketing.domain.product;
 
+import kr.team.ticketing.domain.generic.money.Money;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -19,10 +20,10 @@ public class OptionSpec {
     private String name;
 
     @Column(name = "PRICE")
-    private int price;
+    private Money price;
 
     @Builder
-    public OptionSpec(Long id, String name, int price) {
+    public OptionSpec(Long id, String name, Money price) {
         this.name = name;
         this.price = price;
     }

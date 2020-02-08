@@ -39,7 +39,7 @@ public class Money {
     }
 
     public Money divide(double divisor) {
-        return new Money(amount.divide(BigDecimal.valueOf(divisor)));
+        return new Money(this.amount.divide(BigDecimal.valueOf(divisor)));
     }
 
     public BigDecimal getAmount() {
