@@ -3,7 +3,6 @@ package kr.team.ticketing.domain.product;
 import kr.team.ticketing.domain.common.utils.DateTimeUtils;
 import kr.team.ticketing.domain.generic.money.Money;
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,7 @@ public class ProductTest {
     public void insert(){
         // given
         productRepository.save(Product.builder()
-                .category(new Category("뮤지컬"))
+                .category(new Category("공연"))
                 .name("뮤즈")
                 .description("뮤즈 공연입니다.")
                 .location("LG 아트센터")
@@ -52,21 +51,14 @@ public class ProductTest {
         List<Product> all = productRepository.findAll();
 
         //then
-        Product product = all.get(2);
+        Product product = all.get(0);
         assertThat(product.getName()).isEqualTo("뮤즈");
         assertThat(DateTimeUtils.format(product.getStartDate())).isEqualTo("2020-02-07 12:43");
         assertThat(product.getLocation()).isEqualTo("LG 아트센터");
-        assertThat(product.getCategory().getName()).isEqualTo("뮤지컬");
+        assertThat(product.getCategory().getName()).isEqualTo("공연");
 
         OptionGroupSpec groupSpec = product.getOptionGroupSpecs().get(0);
         assertThat(groupSpec.getDetail()).isEqualTo(AGE);
         assertThat(groupSpec.getOptionSpecs().get(0).getName()).isEqualTo("성인");
-    }
-
-    @Ignore
-    @Test
-    public void findAllCategory(){
-        List<Product> musical = productRepository.findAllByCategory(new Category("뮤지컬"));
-        System.out.println(musical);
     }
 }
