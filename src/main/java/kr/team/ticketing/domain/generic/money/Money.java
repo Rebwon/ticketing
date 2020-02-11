@@ -1,6 +1,7 @@
 package kr.team.ticketing.domain.generic.money;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.function.Function;
@@ -75,6 +76,6 @@ public class Money {
 
     @Override
     public String toString() {
-        return amount.toString() + "원";
+        return amount.setScale(0, RoundingMode.FLOOR) + "원";
     }
 }

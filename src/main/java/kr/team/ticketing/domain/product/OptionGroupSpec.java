@@ -1,9 +1,6 @@
 package kr.team.ticketing.domain.product;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,6 +10,7 @@ import java.util.List;
 @Table(name = "OPTION_GROUP_SPECS")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EqualsAndHashCode(of = "id")
 public class OptionGroupSpec {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

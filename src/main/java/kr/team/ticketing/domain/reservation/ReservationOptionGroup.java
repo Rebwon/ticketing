@@ -1,9 +1,6 @@
 package kr.team.ticketing.domain.reservation;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,6 +9,7 @@ import java.util.List;
 @Table(name = "RESERVATION_OPTION_GROUPS")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EqualsAndHashCode(of = "id")
 public class ReservationOptionGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

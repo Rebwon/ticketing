@@ -2,10 +2,7 @@ package kr.team.ticketing.domain.reservation;
 
 import kr.team.ticketing.domain.common.BaseTimeEntity;
 import kr.team.ticketing.domain.common.Email;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,6 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "RESERVATIONS")
 @Getter
+@EqualsAndHashCode(of = "id", callSuper = false)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Reservation extends BaseTimeEntity {
     @Id

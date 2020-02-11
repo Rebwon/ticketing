@@ -2,6 +2,7 @@ package kr.team.ticketing.domain.product;
 
 import kr.team.ticketing.domain.generic.money.Money;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import javax.persistence.*;

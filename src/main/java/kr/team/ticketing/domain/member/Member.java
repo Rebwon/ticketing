@@ -2,10 +2,7 @@ package kr.team.ticketing.domain.member;
 
 import kr.team.ticketing.domain.common.Email;
 import kr.team.ticketing.domain.reservation.Reservation;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,6 +11,7 @@ import java.util.List;
 @Getter
 @Table(name = "MEMBERS")
 @Entity
+@EqualsAndHashCode(of = "id")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
     @Id
