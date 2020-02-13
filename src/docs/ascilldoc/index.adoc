@@ -1,0 +1,15 @@
+= Ticketing Restful API Document
+:doctype: ticketing
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+== Index
+
+==== HTTP Request
+include::{snippets}/index/http-request.adoc[]
+
+==== HTTP Response
+include::{snippets}/index/http-response.adoc[]
