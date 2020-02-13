@@ -6,7 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "RESERVATION_MEMBER_COMMENT")
+@Table(name = "RESERVATION_MEMBER_COMMENTS")
 @Getter
 @EqualsAndHashCode(of = "id", callSuper = false)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -25,7 +25,7 @@ public class Comment extends BaseTimeEntity {
     @Column(name = "SCORE")
     private double score;
 
-    @Column(name = "COMMENT")
+    @Column(name = "MEMBER_COMMENT")
     private String comment;
 
     @Builder
