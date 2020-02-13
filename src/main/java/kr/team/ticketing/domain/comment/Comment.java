@@ -1,4 +1,4 @@
-package kr.team.ticketing.domain.reservation;
+package kr.team.ticketing.domain.comment;
 
 import kr.team.ticketing.domain.common.BaseTimeEntity;
 import lombok.*;
@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @EqualsAndHashCode(of = "id", callSuper = false)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ReservationMemberComment extends BaseTimeEntity {
+public class Comment extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RESERVATION_MEMBER_COMMENT_ID")
@@ -29,7 +29,7 @@ public class ReservationMemberComment extends BaseTimeEntity {
     private String comment;
 
     @Builder
-    public ReservationMemberComment(double score, String comment) {
+    public Comment(double score, String comment) {
         this.score = score;
         this.comment = comment;
     }

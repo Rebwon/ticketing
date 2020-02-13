@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class DateTimeUtilsTest {
     @Test
-    public void createDateTime(){
+    public void createDateTime() {
         LocalDateTime dateTime = DateTimeUtils.createDateTime("2020-02-07 12:22");
         assertThat(dateTime.getYear()).isEqualTo(2020);
         assertThat(dateTime.getMonthValue()).isEqualTo(2);

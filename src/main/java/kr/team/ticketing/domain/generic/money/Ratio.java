@@ -1,5 +1,14 @@
 package kr.team.ticketing.domain.generic.money;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+import java.util.Objects;
+
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Ratio {
     private double rate;
 
@@ -11,16 +20,30 @@ public class Ratio {
         this.rate = rate;
     }
 
-    Ratio() {
-
+    private Money getDiscountPrice(){
+        return new Money(BigDecimal.valueOf(rate));
     }
 
     public Money of(Money price) {
-        Money discount = price.times(rate);
-        return price.minus(discount);
+        if(rate < 1){
+            Money discount = price.times(rate);
+            return price.minus(discount);
+        } else{
+            Money discountPrice = getDiscountPrice();
+            return price.minus(discountPrice);
+        }
     }
 
-    public double getRate() {
-        return rate;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ratio ratio = (Ratio) o;
+        return Double.compare(ratio.rate, rate) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rate);
     }
 }

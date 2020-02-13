@@ -7,13 +7,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RatioTest {
     @Test
     public void discount() {
-        Ratio ratio1 = Ratio.valueOf(0.2);
-        Ratio ratio2 = Ratio.valueOf(0.25);
-        Ratio ratio3 = Ratio.valueOf(0.1);
+        Ratio twentyPercent = Ratio.valueOf(0.2);
+        Ratio twentyFivePercent = Ratio.valueOf(0.25);
+        Ratio discountPrice = Ratio.valueOf(3000);
         Money price = Money.wons(15000);
 
-        assertThat(ratio1.of(price).toString()).isEqualTo("12000원");
-        assertThat(ratio2.of(price).toString()).isEqualTo("11250원");
-        assertThat(ratio3.of(price).toString()).isEqualTo("13500원");
+        assertThat(twentyPercent.of(price).toString()).isEqualTo("12000원");
+        assertThat(twentyFivePercent.of(price).toString()).isEqualTo("11250원");
+        assertThat(discountPrice.of(price).toString()).isEqualTo("12000원");
     }
 }

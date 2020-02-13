@@ -22,12 +22,12 @@ public class ProductTest {
     ProductRepository productRepository;
 
     @After
-    public void cleanUp(){
+    public void cleanUp() {
         productRepository.deleteAll();
     }
 
     @Test
-    public void insert(){
+    public void insert() {
         // given
         productRepository.save(Product.builder()
                 .category(new Category("공연"))
@@ -39,12 +39,12 @@ public class ProductTest {
                 .count(25)
                 .optionGroupSpecs(asList(
                         OptionGroupSpec.builder()
-                            .detail(AGE)
-                            .options(asList(
-                                OptionSpec.builder().name("성인").price(Money.wons(15000)).build(),
-                                OptionSpec.builder().name("청소년").price(Money.wons(13500)).build(),
-                                OptionSpec.builder().name("7세 이상").price(Money.wons(12000)).build()))
-                            .build()))
+                                .detail(AGE)
+                                .options(asList(
+                                        OptionSpec.builder().name("성인").price(Money.wons(15000)).build(),
+                                        OptionSpec.builder().name("청소년").price(Money.wons(13500)).build(),
+                                        OptionSpec.builder().name("7세 이상").price(Money.wons(12000)).build()))
+                                .build()))
                 .build());
 
         // when

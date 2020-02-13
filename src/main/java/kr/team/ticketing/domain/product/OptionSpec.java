@@ -1,9 +1,7 @@
 package kr.team.ticketing.domain.product;
 
 import kr.team.ticketing.domain.generic.money.Money;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -11,6 +9,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "OPTION_SPECS")
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OptionSpec {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

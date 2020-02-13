@@ -23,17 +23,17 @@ public class CategoryTest {
     ProductRepository productRepository;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         // given
         IntStream.range(0, 20).forEach(this::saveProduct);
     }
 
     @After
-    public void cleanUp(){
+    public void cleanUp() {
         productRepository.deleteAll();
     }
 
-    private Product saveProduct(int index){
+    private Product saveProduct(int index) {
         Product product = Product.builder()
                 .category(new Category("뮤지컬"))
                 .count(15)
@@ -53,7 +53,7 @@ public class CategoryTest {
     }
 
     @Test
-    public void findAllCategoryName(){
+    public void findAllCategoryName() {
         List<Product> musical = productRepository.findAllByCategoryName("뮤지컬");
         assertThat(musical.size()).isEqualTo(20);
     }

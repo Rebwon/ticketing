@@ -1,6 +1,7 @@
 package kr.team.ticketing.domain.member;
 
 import kr.team.ticketing.domain.common.Email;
+import kr.team.ticketing.domain.coupon.Coupon;
 import kr.team.ticketing.domain.reservation.Reservation;
 import lombok.*;
 
@@ -29,6 +30,9 @@ public class Member {
 
     @OneToMany
     private List<Reservation> reservationList = new ArrayList<>();
+
+    @OneToMany
+    private List<Coupon> couponList = new ArrayList<>();
 
     @Builder
     public Member(String name, Email email, String tel, String picture) {
