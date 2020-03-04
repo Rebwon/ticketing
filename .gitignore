@@ -21,3 +21,8 @@ bin/
 *.ipr
 
 .application-oauth.yml
+
+src/main/generated
+
+src/main/resources/static
+src/main/resources/templates

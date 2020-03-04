@@ -1,8 +1,9 @@
 package kr.team.ticketing.domain.reservation;
 
-import kr.team.ticketing.domain.common.BaseTimeEntity;
-import kr.team.ticketing.domain.common.Email;
+import kr.team.ticketing.domain.BaseEntity;
+import kr.team.ticketing.domain.object.Email;
 import lombok.*;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,47 +11,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "RESERVATIONS")
 @Getter
-@EqualsAndHashCode(of = "id", callSuper = false)
+@Where(clause = "deleted = 0")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Reservation extends BaseTimeEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "RESERVATION_ID")
-    private Long id;
-
-    @Column(name = "MEMBER_ID")
+public class Reservation extends BaseEntity {
+    @Column
     private Long memberId;
-
-    @Column(name = "RESERVATION_MEMBER_NAME")
+    @Column
     private String name;
-
-    @Column(name = "RESERVATION_MEMBER_EMAIL")
-    @Embedded
+    @Column
     private Email email;
-
-    @Column(name = "RESERVATION_MEMBER_TEL")
+    @Column
     private String tel;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "STATUS")
-    private ReservationStatus reservationStatus;
-
-    @Column(name = "RESERVATION_DATE")
-    private LocalDateTime reservationDate;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "RESERVATION_ID")
-    private List<ReservationInfo> reservationInfoList = new ArrayList<>();
-
-    @Builder
-    public Reservation(String name, Email email, String tel, ReservationStatus reservationStatus, LocalDateTime reservationDate, List<ReservationInfo> reservationInfoList) {
-        this.name = name;
-        this.email = email;
-        this.tel = tel;
-        this.reservationStatus = reservationStatus;
-        this.reservationDate = reservationDate;
-        this.reservationInfoList.addAll(reservationInfoList);
-    }
+    @Column
+    private LocalDateTime reserveDate;
+    @Column
+    private int deleted;
+    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ReservationLineItem> lineItems = new ArrayList<>();
 }

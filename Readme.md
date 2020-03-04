@@ -4,12 +4,12 @@
 
 **BackEnd**
 - Java 8
-- Spring Boot 2.1.9
+- Spring Boot 2.2.1
 - Spring Data JPA
 - Spring Security OAuth2 Client
 - Spring Rest Docs
 - QueryDSL
-- Junit4
+- Junit5
 
 **FrontEnd**
 - HTML5
@@ -20,7 +20,7 @@
 
 **etc**
 - Configure Management: Git, Github
-- Build: Gradle 4.10.2
+- Build: Gradle 5.6.4
 - Coding Convention: Intellij Default
 
 ### Commit Convention

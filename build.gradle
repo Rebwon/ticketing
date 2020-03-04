@@ -1,6 +1,6 @@
 buildscript {
     ext{
-        springBootVersion = '2.1.9.RELEASE'
+        springBootVersion = '2.2.1.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -8,7 +8,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath("org.asciidoctor:asciidoctor-gradle-plugin:1.5.3")
+        classpath("org.asciidoctor:asciidoctor-gradle-plugin:1.5.10")
     }
 }
 
@@ -32,16 +32,22 @@ repositories {
 }
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.springframework.boot:spring-boot-starter-mustache')
-    compile('org.projectlombok:lombok')
-    compile('org.springframework.boot:spring-boot-starter-data-jpa')
-    compile('org.modelmapper:modelmapper:2.3.0')
+    //implementation('org.springframework.boot:spring-boot-starter-security')
+    //implementation('org.springframework.security:spring-security-oauth2-client')
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-mustache')
+    implementation('org.projectlombok:lombok')
+    implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+    implementation('org.modelmapper:modelmapper:2.3.0')
     runtimeOnly('mysql:mysql-connector-java')
 
-    testCompile('com.h2database:h2')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile('org.springframework.restdocs:spring-restdocs-mockmvc')
+    annotationProcessor('org.projectlombok:lombok')
+
+    testCompileOnly('com.h2database:h2')
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation('org.springframework.restdocs:spring-restdocs-mockmvc')
 
     asciidoctor('org.springframework.restdocs:spring-restdocs-asciidoctor')
 }

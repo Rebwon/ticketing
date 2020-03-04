@@ -1,25 +1,24 @@
 package kr.team.ticketing.domain.reservation;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import kr.team.ticketing.domain.BaseEntity;
-import kr.team.ticketing.domain.object.generic.money.Money;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.Lob;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ReservationOption extends BaseEntity {
-    @JsonIgnore
-    @ManyToOne
-    private ReservationLineItem lineItem;
+public class Comment extends BaseEntity {
     @Column
-    private String name;
+    private Long productId;
     @Column
-    private Money price;
+    private Long reservationId;
+    @Column
+    private double score;
+    @Lob
+    private String comment;
 }

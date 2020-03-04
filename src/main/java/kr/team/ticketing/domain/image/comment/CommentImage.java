@@ -1,8 +1,8 @@
-package kr.team.ticketing.domain.reservation;
+package kr.team.ticketing.domain.image.comment;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import kr.team.ticketing.domain.BaseEntity;
-import kr.team.ticketing.domain.object.generic.money.Money;
+import kr.team.ticketing.domain.image.Image;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,12 +14,12 @@ import javax.persistence.ManyToOne;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ReservationOption extends BaseEntity {
+public class CommentImage extends BaseEntity {
     @JsonIgnore
     @ManyToOne
-    private ReservationLineItem lineItem;
+    private Image image;
     @Column
-    private String name;
+    private Long reservationId;
     @Column
-    private Money price;
+    private Long displayId;
 }
