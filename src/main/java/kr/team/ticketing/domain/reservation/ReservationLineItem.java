@@ -23,4 +23,25 @@ public class ReservationLineItem extends BaseEntity {
     private int count;
     @OneToMany(mappedBy = "lineItem", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReservationOption> reserveOptions = new ArrayList<>();
+
+    public ReservationLineItem(Long productId, int count) {
+        this.productId = productId;
+        this.count = count;
+    }
+
+    public void addReservationOption(ReservationOption reservationOption) {
+        reservationOption.setLineItem(this);
+        this.reserveOptions.add(reservationOption);
+    }
+
+    public void addReservationOptions(List<ReservationOption> reserveOptions) {
+        reserveOptions.forEach(o -> addReservationOption(o));
+    }
+
+    public void setReservation(Reservation reservation) {
+        if(this.reservation != null) {
+            this.reservation.getLineItems().remove(this);
+        }
+        this.reservation = reservation;
+    }
 }

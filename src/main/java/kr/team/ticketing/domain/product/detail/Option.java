@@ -6,6 +6,7 @@ import kr.team.ticketing.domain.object.generic.money.Money;
 import kr.team.ticketing.domain.object.generic.money.Ratio;
 import kr.team.ticketing.domain.product.Product;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,4 +26,18 @@ public class Option extends BaseEntity {
     @JsonIgnore
     @ManyToOne
     private Product product;
+
+    @Builder
+    public Option(ProductType productType, Money price, Ratio discountRate) {
+        this.productType = productType;
+        this.price = price;
+        this.discountRate = discountRate;
+    }
+
+    public void setProduct(Product product) {
+        if(this.product != null) {
+            this.product.getOptions().remove(this);
+        }
+        this.product = product;
+    }
 }

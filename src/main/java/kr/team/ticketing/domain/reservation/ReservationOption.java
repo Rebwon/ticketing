@@ -22,4 +22,16 @@ public class ReservationOption extends BaseEntity {
     private String name;
     @Column
     private Money price;
+
+    public ReservationOption(String name, Money price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public void setLineItem(ReservationLineItem lineItem) {
+        if(this.lineItem != null) {
+            this.lineItem.getReserveOptions().remove(this);
+        }
+        this.lineItem = lineItem;
+    }
 }

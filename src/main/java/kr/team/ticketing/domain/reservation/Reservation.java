@@ -26,7 +26,29 @@ public class Reservation extends BaseEntity {
     @Column
     private LocalDateTime reserveDate;
     @Column
-    private int deleted;
+    private int deleted = 0;
     @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReservationLineItem> lineItems = new ArrayList<>();
+
+    @Builder
+    public Reservation(Long memberId, String name, Email email, String tel, LocalDateTime reserveDate) {
+        this.memberId = memberId;
+        this.name = name;
+        this.email = email;
+        this.tel = tel;
+        this.reserveDate = reserveDate;
+    }
+
+    public void addLineItem(ReservationLineItem lineItem) {
+        lineItem.setReservation(this);
+        this.lineItems.add(lineItem);
+    }
+
+    public void addLineItems(List<ReservationLineItem> lineItems) {
+        lineItems.forEach(i -> addLineItem(i));
+    }
+
+    public void delete() {
+        this.deleted = 1;
+    }
 }

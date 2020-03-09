@@ -1,7 +1,6 @@
 package kr.team.ticketing.domain.product;
 
 import kr.team.ticketing.domain.BaseEntity;
-import kr.team.ticketing.domain.image.product.ProductImage;
 import kr.team.ticketing.domain.product.detail.Option;
 import lombok.*;
 
@@ -19,10 +18,25 @@ public class Product extends BaseEntity {
     private String content;
     @Column
     private String event;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Category category;
+    @Column
+    private Long categoryId;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Option> options = new ArrayList<>();
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductImage> productImages = new ArrayList<>();
+
+    @Builder
+    public Product(String description, String content, String event, Long categoryId) {
+        this.description = description;
+        this.content = content;
+        this.event = event;
+        this.categoryId = categoryId;
+    }
+
+    public void addOption(Option option) {
+        option.setProduct(this);
+        this.options.add(option);
+    }
+
+    public void addOptions(List<Option> options) {
+        options.forEach(o -> addOption(o));
+    }
 }

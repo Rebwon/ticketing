@@ -1,10 +1,9 @@
 package kr.team.ticketing.domain.image.product;
 
-import kr.team.ticketing.domain.BaseEntity;
 import kr.team.ticketing.domain.image.Image;
 import kr.team.ticketing.domain.image.ImageType;
-import kr.team.ticketing.domain.product.Product;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,12 +12,15 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ProductImage extends BaseEntity {
+@DiscriminatorValue("PRODUCT")
+public class ProductImage extends Image {
     @Enumerated(EnumType.STRING)
     @Column
     private ImageType imageType;
-    @ManyToOne
-    private Image image;
-    @ManyToOne
-    private Product product;
+
+    @Builder
+    public ProductImage(String imgName, String saveImgName, String contentType, ImageType imageType) {
+        super(imgName, saveImgName, contentType);
+        this.imageType = imageType;
+    }
 }
