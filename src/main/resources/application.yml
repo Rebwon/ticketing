@@ -1,0 +1,18 @@
+spring:
+  profile: local
+  datasource:
+    username: root
+    password: pass
+    url: jdbc:mysql://localhost:3306/ticket?serverTimezone=UTC&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    properties.hibernate:
+      hbm2ddl.auto: create-drop
+      format_sql: true
+    open-in-view: false
+    showSql: true
+    generate-ddl: true
+
+logging:
+  level:
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
