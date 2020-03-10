@@ -15,6 +15,7 @@ import java.util.List;
 @Where(clause = "deleted = 0")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Reservation extends BaseEntity {
+    public enum ReservationStatus{RESERVED, CANCELED, PAYED}
     @Column
     private Long memberId;
     @Column
@@ -25,6 +26,9 @@ public class Reservation extends BaseEntity {
     private String tel;
     @Column
     private LocalDateTime reserveDate;
+    @Enumerated(EnumType.STRING)
+    @Column
+    private ReservationStatus status;
     @Column
     private int deleted = 0;
     @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -46,6 +50,18 @@ public class Reservation extends BaseEntity {
 
     public void addLineItems(List<ReservationLineItem> lineItems) {
         lineItems.forEach(i -> addLineItem(i));
+    }
+
+    public void reserved() {
+        this.status = ReservationStatus.RESERVED;
+    }
+
+    public void canceled() {
+        this.status = ReservationStatus.CANCELED;
+    }
+
+    public void payed() {
+        this.status = ReservationStatus.PAYED;
     }
 
     public void delete() {

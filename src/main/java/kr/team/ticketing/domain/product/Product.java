@@ -39,4 +39,11 @@ public class Product extends BaseEntity {
     public void addOptions(List<Option> options) {
         options.forEach(o -> addOption(o));
     }
+
+    public void update(Product product) {
+        this.description = product.getDescription();
+        this.content = product.getContent();
+        this.event = product.getEvent();
+        this.categoryId = product.getCategoryId();
+    }
 }
