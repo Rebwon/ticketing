@@ -1,17 +1,23 @@
 spring:
-  profile: local
+  profiles:
+    active: local
+---
+spring:
+  profiles: local
   datasource:
     username: root
     password: pass
     url: jdbc:mysql://localhost:3306/ticket?serverTimezone=UTC&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
-    properties.hibernate:
-      hbm2ddl.auto: create-drop
-      format_sql: true
+    hibernate:
+      ddl-auto: create-drop
     open-in-view: false
-    showSql: true
-    generate-ddl: true
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
 
 logging:
   level:
