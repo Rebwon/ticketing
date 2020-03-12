@@ -14,6 +14,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
+@Table(name = "OPTIONS")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Option extends BaseEntity {
     @Enumerated(EnumType.STRING)

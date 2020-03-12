@@ -1,5 +1,6 @@
 package kr.team.ticketing.domain.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import kr.team.ticketing.domain.BaseEntity;
 import kr.team.ticketing.domain.product.detail.Option;
 import lombok.*;
@@ -20,6 +21,7 @@ public class Product extends BaseEntity {
     private String event;
     @Column
     private Long categoryId;
+    @JsonIgnore
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Option> options = new ArrayList<>();
 
