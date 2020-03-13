@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
@@ -58,10 +59,31 @@ public class ProductController {
 
 
     @PostMapping("/{productId}/options")
-    public ResponseEntity saveOption(@PathVariable Long productId,
-                                     @RequestBody OptionParam param) {
-        Option save = optionService.save(productId, param);
+    public ResponseEntity saveOptions(@PathVariable Long productId,
+                                      @RequestBody List<OptionParam> optionParams) {
+        List<Option> saveOptions = optionService.save(productId, optionParams);
         URI uri = linkTo(ProductController.class).slash(productId).slash("options").toUri();
-        return ResponseEntity.created(uri).body(save);
+        return ResponseEntity.created(uri).body(saveOptions);
+    }
+
+    @GetMapping("/{productId}/options")
+    public ResponseEntity findOptions(@PathVariable Long productId,
+                                      Pageable pageable) {
+        Page<Option> options = optionService.find(productId, pageable);
+        return ResponseEntity.ok(options);
+    }
+
+    @GetMapping("/{productId}/options/{optionId}")
+    public ResponseEntity findOption(@PathVariable Long productId,
+                                     @PathVariable Long optionId) {
+        Option option = optionService.find(productId, optionId);
+        return ResponseEntity.ok(option);
+    }
+
+    @DeleteMapping("/{productId}/options/{optionId}")
+    public ResponseEntity deleteOption(@PathVariable Long productId,
+                                       @PathVariable Long optionId) {
+        optionService.delete(productId, optionId);
+        return ResponseEntity.noContent().build();
     }
 }

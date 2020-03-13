@@ -1,9 +1,14 @@
 package kr.team.ticketing.web.admin.product;
 
 import kr.team.ticketing.common.ControllerTests;
+import kr.team.ticketing.domain.object.generic.money.Money;
+import kr.team.ticketing.domain.object.generic.money.Ratio;
 import kr.team.ticketing.domain.product.Product;
+import kr.team.ticketing.domain.product.ProductRepository;
 import kr.team.ticketing.domain.product.category.Category;
 import kr.team.ticketing.domain.product.category.CategoryRepository;
+import kr.team.ticketing.domain.product.detail.Option;
+import kr.team.ticketing.domain.product.detail.ProductType;
 import kr.team.ticketing.web.admin.product.request.OptionParam;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,15 +17,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 
+import java.util.List;
+import java.util.stream.IntStream;
+
+import static java.util.Arrays.asList;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class ProductControllerTest extends ControllerTests {
     private static final String PRODUCT_URI = getUri(ProductController.class);
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -61,28 +73,100 @@ class ProductControllerTest extends ControllerTests {
                 ));
     }
 
-    @DisplayName("상품 옵션 추가")
+    @DisplayName("상품 한건 조회")
     @Test
-    void saveOption() throws Exception {
+    void findProduct() throws Exception{
         // given
-        OptionParam param = OptionParam.builder()
-                .productType("ADULT")
-                .discountRate(0.2)
-                .price(17000)
+        Product product = this.saveProduct(40);
+
+        // when & then
+        mockMvc.perform(get(PRODUCT_URI + "/" + product.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("description").hasJsonPath())
+                .andDo(document("product/findProduct"));
+    }
+
+    @DisplayName("상품 조회")
+    @Test
+    void findProducts() throws Exception{
+        // given
+        IntStream.range(0, 30).forEach(this::saveProduct);
+
+        // when & then
+        mockMvc.perform(get(PRODUCT_URI)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andDo(document("product/findProducts"));
+    }
+
+    private Product saveProduct(int index) {
+        Product product = Product.builder()
+                .categoryId(1l)
+                .description("Product" + index)
                 .build();
+        return this.productRepository.save(product);
+    }
+
+    @DisplayName("상품 여러 옵션 추가")
+    @Test
+    void saveOptions() throws Exception {
+        // given
+        List<OptionParam> params = asList(
+                OptionParam.builder()
+                        .productType("ADULT")
+                        .discountRate(0.2)
+                        .price(17000)
+                        .build(),
+                OptionParam.builder()
+                        .productType("TEENAGER")
+                        .discountRate(0.25)
+                        .price(15000)
+                        .build(),
+                OptionParam.builder()
+                        .productType("CHILDREN")
+                        .discountRate(0.3)
+                        .price(13000)
+                        .build()
+        );
 
         // when & then
         mockMvc.perform(post(PRODUCT_URI + "/1" + "/options")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(param)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(params)))
                 .andDo(print())
                 .andExpect(status().isCreated())
-                .andDo(document("product/saveOption",
+                .andDo(document("product/saveOptions",
                         requestFields(
-                                fieldWithPath("productType").type(JsonFieldType.STRING).description("옵션 타입"),
-                                fieldWithPath("discountRate").type(JsonFieldType.NUMBER).description("옵션 할인율"),
-                                fieldWithPath("price").type(JsonFieldType.NUMBER).description("옵션 가격")
+                                fieldWithPath("[].productType").type(JsonFieldType.STRING).description("옵션 타입"),
+                                fieldWithPath("[].discountRate").type(JsonFieldType.NUMBER).description("옵션 할인율"),
+                                fieldWithPath("[].price").type(JsonFieldType.NUMBER).description("옵션 가격")
                         )
                 ));
+    }
+
+    @DisplayName("상품 옵션 삭제")
+    @Test
+    void deleteOption() throws Exception{
+        // given
+        Product product = Product.builder()
+                .categoryId(1l)
+                .description("캣츠 뮤지컬")
+                .content("캣츠 뮤지컬은 매우 재미있습니다.")
+                .event("")
+                .build();
+
+        Option option = Option.builder()
+                .productType(ProductType.ADULT)
+                .discountRate(Ratio.valueOf(0.2))
+                .price(Money.wons(17000))
+                .build();
+        product.addOption(option);
+        productRepository.save(product);
+
+        // when & then
+        mockMvc.perform(delete(PRODUCT_URI + "/" + product.getId() + "/options/1"))
+                .andExpect(status().isNoContent())
+                .andDo(document("product/deleteOption"));
     }
 }
