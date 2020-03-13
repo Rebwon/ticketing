@@ -1,6 +1,7 @@
 package kr.team.ticketing.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,6 @@ public class ControllerTests {
                 .addFilter(new CharacterEncodingFilter("UTF-8", true))
                 .apply(documentationConfiguration(restDocumentationContextProvider))
                 .build();
+        this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 }

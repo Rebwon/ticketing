@@ -5,11 +5,13 @@ import org.junit.jupiter.api.Disabled;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 
 import javax.persistence.EntityManager;
 
 @Disabled
 @DataJpaTest
+@ActiveProfiles("test")
 @Import(JpaConfig.class)
 public class DomainTests {
     @Autowired

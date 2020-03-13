@@ -1,13 +1,9 @@
 package kr.team.ticketing.web.admin.product;
 
 import kr.team.ticketing.common.ControllerTests;
-import kr.team.ticketing.domain.object.generic.money.Money;
-import kr.team.ticketing.domain.object.generic.money.Ratio;
 import kr.team.ticketing.domain.product.Product;
 import kr.team.ticketing.domain.product.category.Category;
 import kr.team.ticketing.domain.product.category.CategoryRepository;
-import kr.team.ticketing.domain.product.detail.Option;
-import kr.team.ticketing.domain.product.detail.ProductType;
 import kr.team.ticketing.web.admin.product.request.OptionParam;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -56,7 +52,7 @@ class ProductControllerTest extends ControllerTests {
                                 fieldWithPath("id").type(JsonFieldType.NULL).description("상품 ID"),
                                 fieldWithPath("createdDate").type(JsonFieldType.NULL).description("상품 생성일"),
                                 fieldWithPath("modifiedDate").type(JsonFieldType.NULL).description("상품 수정일"),
-                                //fieldWithPath("options").type(JsonFieldType.ARRAY).description("상품 옵션"),
+                                fieldWithPath("options").type(JsonFieldType.ARRAY).description("상품 옵션"),
                                 fieldWithPath("categoryId").type(JsonFieldType.NUMBER).description("카테고리 ID"),
                                 fieldWithPath("description").type(JsonFieldType.STRING).description("상품 간략 설명"),
                                 fieldWithPath("content").type(JsonFieldType.STRING).description("상품 상세 설명"),

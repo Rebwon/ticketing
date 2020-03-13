@@ -15,7 +15,8 @@ public class ProductService {
 
     @Transactional
     public Product find(Long productId) {
-        return productRepository.getOne(productId);
+        return productRepository.findById(productId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 상품이 존재하지 않습니다."));
     }
 
     @Transactional
@@ -30,8 +31,7 @@ public class ProductService {
 
     @Transactional
     public void delete(Long productId) {
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 상품이 존재하지 않습니다."));
+        Product product = productRepository.getOne(productId);
         product.getOptions().clear();
         productRepository.delete(product);
     }
