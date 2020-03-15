@@ -36,6 +36,15 @@ public class OptionService {
     }
 
     @Transactional
+    public void update(Long productId, Long optionId, OptionParam param) {
+        Product product = productRepository.getOne(productId);
+        Option option = optionRepository.getOne(optionId);
+        option.update(param);
+        option.setProduct(product);
+        optionRepository.save(option);
+    }
+
+    @Transactional
     public Page<Option> find(Long productId, Pageable pageable) {
         return optionRepository.findAllByProductId(productId, pageable);
     }

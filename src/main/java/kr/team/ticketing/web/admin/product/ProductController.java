@@ -3,7 +3,6 @@ package kr.team.ticketing.web.admin.product;
 import kr.team.ticketing.domain.product.Product;
 import kr.team.ticketing.domain.product.detail.Option;
 import kr.team.ticketing.service.admin.product.ProductService;
-import kr.team.ticketing.service.admin.product.display.DisplayService;
 import kr.team.ticketing.service.admin.product.option.OptionService;
 import kr.team.ticketing.web.admin.product.request.OptionParam;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +22,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 public class ProductController {
     private final ProductService productService;
     private final OptionService optionService;
-    private final DisplayService displayService;
 
     @PostMapping
     public ResponseEntity saveProduct(@RequestBody Product product) {
@@ -64,6 +62,14 @@ public class ProductController {
         List<Option> saveOptions = optionService.save(productId, optionParams);
         URI uri = linkTo(ProductController.class).slash(productId).slash("options").toUri();
         return ResponseEntity.created(uri).body(saveOptions);
+    }
+
+    @PutMapping("/{productId}/options/{optionId}")
+    public ResponseEntity updateOption(@PathVariable Long productId,
+                                        @PathVariable Long optionId,
+                                        @RequestBody OptionParam param) {
+        optionService.update(productId, optionId, param);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{productId}/options")
