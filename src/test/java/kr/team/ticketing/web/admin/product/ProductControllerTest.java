@@ -10,9 +10,7 @@ import kr.team.ticketing.domain.product.category.CategoryRepository;
 import kr.team.ticketing.domain.product.detail.Option;
 import kr.team.ticketing.domain.product.detail.ProductType;
 import kr.team.ticketing.web.admin.product.request.OptionParam;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
@@ -43,6 +41,7 @@ class ProductControllerTest extends ControllerTests {
     }
 
     @DisplayName("상품 추가")
+    @Order(1)
     @Test
     void saveProduct() throws Exception {
         // given
@@ -71,6 +70,27 @@ class ProductControllerTest extends ControllerTests {
                                 fieldWithPath("event").type(JsonFieldType.STRING).description("상품 이벤트")
                         )
                 ));
+    }
+
+    @DisplayName("상품 수정")
+    @Order(2)
+    @Test
+    void updateProduct() throws Exception {
+        // given
+        Product product = Product.builder()
+                .categoryId(2l)
+                .description("캣츠 뮤지컬입니다.")
+                .content("캣츠 뮤지컬은 매우 흥미롭고 재미있습니다.")
+                .event("2020년 3월 20일 부터 2020년 4월 20일까지 특별 이벤트!!")
+                .build();
+
+        // when & then
+        mockMvc.perform(put(PRODUCT_URI + "/1")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(objectMapper.writeValueAsString(product)))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andDo(document("product/save"));
     }
 
     @DisplayName("상품 한건 조회")

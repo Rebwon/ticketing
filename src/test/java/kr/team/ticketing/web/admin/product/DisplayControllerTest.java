@@ -6,6 +6,7 @@ import kr.team.ticketing.domain.product.display.Display;
 import kr.team.ticketing.domain.product.display.DisplayRepository;
 import kr.team.ticketing.web.admin.product.request.DisplayParam;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -27,6 +28,7 @@ class DisplayControllerTest extends ControllerTests {
     private DisplayRepository displayRepository;
 
     @DisplayName("전시 정보 추가")
+    @Order(1)
     @Test
     void saveDisplay() throws Exception {
         // given
