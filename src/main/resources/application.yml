@@ -3,13 +3,6 @@ spring:
     active: local
 ---
 spring:
-  profiles: local
-  datasource:
-    username: root
-    password: pass
-    url: jdbc:mysql://localhost:3306/ticket?serverTimezone=UTC&characterEncoding=UTF-8
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -21,3 +14,11 @@ spring:
 logging:
   level:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+---
+spring:
+  profiles: local
+  datasource:
+    username: root
+    password: pass
+    url: jdbc:mysql://localhost:3306/ticket?serverTimezone=UTC&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
