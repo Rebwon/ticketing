@@ -35,4 +35,13 @@ public class Display extends BaseEntity {
         this.homePage = homePage;
         this.email = email;
     }
+
+    public void update(Display displayDto) {
+        this.productId = displayDto.getProductId();
+        this.openingHours = displayDto.getOpeningHours();
+        this.address = displayDto.getAddress();
+        this.tel = displayDto.getTel();
+        this.homePage = displayDto.getHomePage();
+        this.email = displayDto.getEmail();
+    }
 }
