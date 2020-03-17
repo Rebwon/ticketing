@@ -20,7 +20,7 @@ public class Reservation extends BaseEntity {
     private Long memberId;
     @Column
     private String name;
-    @Column
+    @Embedded
     private Email email;
     @Column
     private String tel;

@@ -23,7 +23,7 @@ public class Display extends BaseEntity {
     private String tel;
     @Column
     private String homePage;
-    @Column
+    @Embedded
     private Email email;
 
     @Builder
