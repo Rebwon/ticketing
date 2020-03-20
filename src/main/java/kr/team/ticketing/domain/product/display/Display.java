@@ -23,7 +23,7 @@ public class Display extends BaseEntity {
     private String tel;
     @Column
     private String homePage;
-    @Column
+    @Embedded
     private Email email;
 
     @Builder
@@ -34,5 +34,14 @@ public class Display extends BaseEntity {
         this.tel = tel;
         this.homePage = homePage;
         this.email = email;
+    }
+
+    public void update(Display displayDto) {
+        this.productId = displayDto.getProductId();
+        this.openingHours = displayDto.getOpeningHours();
+        this.address = displayDto.getAddress();
+        this.tel = displayDto.getTel();
+        this.homePage = displayDto.getHomePage();
+        this.email = displayDto.getEmail();
     }
 }

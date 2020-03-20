@@ -5,6 +5,7 @@ import kr.team.ticketing.domain.BaseEntity;
 import kr.team.ticketing.domain.object.generic.money.Money;
 import kr.team.ticketing.domain.object.generic.money.Ratio;
 import kr.team.ticketing.domain.product.Product;
+import kr.team.ticketing.web.admin.product.request.OptionParam;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,6 +15,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
+@Table(name = "OPTIONS")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Option extends BaseEntity {
     @Enumerated(EnumType.STRING)
@@ -39,5 +41,11 @@ public class Option extends BaseEntity {
             this.product.getOptions().remove(this);
         }
         this.product = product;
+    }
+
+    public void update(OptionParam param) {
+        this.productType = ProductType.valueOf(param.getProductType());
+        this.price = Money.wons(param.getPrice());
+        this.discountRate = Ratio.valueOf(param.getDiscountRate());
     }
 }

@@ -1,9 +1,10 @@
 package kr.team.ticketing.web.admin.product;
 
 import kr.team.ticketing.domain.product.Product;
+import kr.team.ticketing.domain.product.detail.Option;
 import kr.team.ticketing.service.admin.product.ProductService;
-import kr.team.ticketing.service.admin.product.display.DisplayService;
 import kr.team.ticketing.service.admin.product.option.OptionService;
+import kr.team.ticketing.web.admin.product.request.OptionParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
@@ -20,7 +22,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 public class ProductController {
     private final ProductService productService;
     private final OptionService optionService;
-    private final DisplayService displayService;
 
     @PostMapping
     public ResponseEntity saveProduct(@RequestBody Product product) {
@@ -51,6 +52,44 @@ public class ProductController {
     @DeleteMapping("/{productId}")
     public ResponseEntity deleteProduct(@PathVariable Long productId) {
         productService.delete(productId);
+        return ResponseEntity.noContent().build();
+    }
+
+
+    @PostMapping("/{productId}/options")
+    public ResponseEntity saveOptions(@PathVariable Long productId,
+                                      @RequestBody List<OptionParam> optionParams) {
+        List<Option> saveOptions = optionService.save(productId, optionParams);
+        URI uri = linkTo(ProductController.class).slash(productId).slash("options").toUri();
+        return ResponseEntity.created(uri).body(saveOptions);
+    }
+
+    @PutMapping("/{productId}/options/{optionId}")
+    public ResponseEntity updateOption(@PathVariable Long productId,
+                                       @PathVariable Long optionId,
+                                       @RequestBody OptionParam param) {
+        optionService.update(productId, optionId, param);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{productId}/options")
+    public ResponseEntity findOptions(@PathVariable Long productId,
+                                      Pageable pageable) {
+        Page<Option> options = optionService.find(productId, pageable);
+        return ResponseEntity.ok(options);
+    }
+
+    @GetMapping("/{productId}/options/{optionId}")
+    public ResponseEntity findOption(@PathVariable Long productId,
+                                     @PathVariable Long optionId) {
+        Option option = optionService.find(productId, optionId);
+        return ResponseEntity.ok(option);
+    }
+
+    @DeleteMapping("/{productId}/options/{optionId}")
+    public ResponseEntity deleteOption(@PathVariable Long productId,
+                                       @PathVariable Long optionId) {
+        optionService.delete(productId, optionId);
         return ResponseEntity.noContent().build();
     }
 }

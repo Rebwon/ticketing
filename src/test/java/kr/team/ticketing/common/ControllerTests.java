@@ -1,7 +1,10 @@
 package kr.team.ticketing.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -26,6 +29,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 @ActiveProfiles("test")
 @Import(RestDocsConfig.class)
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ControllerTests {
     @Autowired
     protected MockMvc mockMvc;
@@ -44,5 +48,6 @@ public class ControllerTests {
                 .addFilter(new CharacterEncodingFilter("UTF-8", true))
                 .apply(documentationConfiguration(restDocumentationContextProvider))
                 .build();
+        this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 }

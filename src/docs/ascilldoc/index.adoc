@@ -58,7 +58,7 @@
 |====
 
 [[resources-product]]
-=== ADMIN API (PRODUCT)
+=== 상품 API
 
 include::{snippets}/product/save/curl-request.adoc[]
 include::{snippets}/product/save/request-fields.adoc[]

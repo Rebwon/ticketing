@@ -1,15 +1,7 @@
 spring:
-  jpa:
-    properties.hibernate:
-      dialect: org.hibernate.dialect.H2Dialect
+  profiles: test
   datasource:
+    url: jdbc:h2:mem:test
     username: sa
     password:
-    url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver
-    hikari:
-      jdbc-url: jdbc:h2:mem:testdb
-
-logging:
-  level:
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
